@@ -25,8 +25,8 @@ if exist('matlabpool','file')
      else
         % disp('[feOpenLocalCluster] Found Matlab parallel cluster open, not intializing.')
      end
-   catch ME
-     error('[feOpenLocalCluster] Cannot find the Matlab parallel toolbox, not intializing a cluster.')
+   catch 
+     disp('[feOpenLocalCluster] Cannot find the Matlab parallel toolbox, not intializing a cluster.')
      disp('[feOpenLocalCluster] Many computations will be substantially slower, without the parallel toolbox.')
    end
 else
