@@ -1,7 +1,7 @@
 function fe = feConnectomeInit(dwiFile,fgFileName,feFileName,savedir,dwiFileRepeated,anatomyFile,varargin)
 % Initialize a new connectome (fe) structure. 
 %
-%    fe = feConnectomeInit(dwiFile,dtFile,fgFileName,feFileName,savedir,dwiFileRepeated,anatomyFile,varargin);
+%    fe = feConnectomeInit(dwiFile,fgFileName,feFileName,savedir,dwiFileRepeated,anatomyFile,varargin);
 %    
 % We allow a set of (paramName,val) pairs in the varargin that will be
 % executed as fe = feSet(fe,paramName,val)
@@ -22,8 +22,8 @@ fe = feSet(fe,'savedir',savedir);
 
 % Set the xforms (transformations from diffusion data to acpc)
 tempNi = niftiRead(dwiFile);
-fe = feSet(fe, 'img2acpc xform', tempNi.qto_xyz);
-fe = feSet(fe, 'acpc2img xform', inv(tempNi.qto_xyz));
+fe = feSet(fe, 'img2acpc xform', inv(tempNi.sto_ijk));
+fe = feSet(fe, 'acpc2img xform', tempNi.sto_xyz);
 clear tempNi
 
 % Set up the fe name
@@ -46,11 +46,11 @@ end
 % Set fg in the fe structure identifying the fg coordinate frame.
 % Everything in LiFE is in img coordinates, but everyting in mrDiffusion is in acpc.  
 % So here we assume the fibers are read in acpc and we xform them in img.
-fe = feSet(fe,'fg from acpc',fg);
+fe = feSet(fe, 'fg from acpc', fg);
 
 % When the ROI is set to empty, LiFE uses all of the voxels within the
 % connectome as the ROI.
-fe = feSet(fe,'roi fg',[]);
+fe = feSet(fe, 'roi fg',[]);
 clear fg
 
 % Precompute the canonical tensors for each node in each fiber.
