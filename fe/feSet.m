@@ -45,13 +45,15 @@ switch param
     
   case 'fgfromacpc'
     % Fiber group candidate fascicles, Connectome.
-    % Everything isin img coordinates in LiFE
+    % Everything is in img coordinates in LiFE
     
     % If it is a file name load.
     if ischar(val) && exist(val,'file') 
         [p,n] = fileparts(val);
         val     = fgRead(val); 
         fe.fg  = feSet(fe,'fg',fullfile(feGet(fe,'folder'),n,'_img.mat'));
+    else 
+       fe.fg = val;
     end
     
     fgWrite(dtiXformFiberCoords(val, fe.xform.acpc2img,'img'));
