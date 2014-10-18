@@ -89,6 +89,8 @@ fe = feSet(fe,'fit',feFitModel(feGet(fe,'mfiber'),feGet(fe,'dsigdemeaned'),'bbnn
 % white-matter voxel spanned by the tractography model.
 prob.rmse   = feGet(fe,'vox rmse');
 
+keyboard;
+
 %% (1.4) Extract the RMSE of the model on the second data set. 
 % Here we show how to compute the cross-valdiated RMSE of the tractography
 % model in each white-matter voxel. We store this information for later use

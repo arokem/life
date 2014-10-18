@@ -22,8 +22,8 @@ fe = feSet(fe,'savedir',savedir);
 
 % Set the xforms (transformations from diffusion data to acpc)
 tempNi = niftiRead(dwiFile);
-fe = feSet(fe, 'img2acpc xform', tempNi.qto_xyz);
-fe = feSet(fe, 'acpc2img xform', inv(tempNi.qto_xyz));
+fe = feSet(fe, 'img2acpc xform', tempNi.sto_ijk);
+fe = feSet(fe, 'acpc2img xform', inv(tempNi.sto_ijk));
 clear tempNi
 
 % Set up the fe name
