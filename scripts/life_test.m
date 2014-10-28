@@ -19,7 +19,7 @@ fgWrite(small_fg, fullfile(lifeDemoDataPath('diffusion'), 'small_fg.mat'));
 feFileName    = 'life_build_model_demo_CSD_PROB_small';
 
 %% 
-fe = feConnectomeInit(dwiFile, 'small_fg.mat', feFileName,fullfile(fileparts(fgFileName)),dwiFileRepeat,t1File);
+fe = feConnectomeInit(dwiFile, small_fg, feFileName,fullfile(fileparts(fgFileName)),dwiFileRepeat,t1File);
 %fe = feConnectomeInit(dwiFile, fgFileName, feFileName,fullfile(fileparts(fgFileName)),dwiFileRepeat,t1File);
 
 %%  
