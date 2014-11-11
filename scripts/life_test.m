@@ -10,9 +10,12 @@ t1File        = fullfile(lifeDemoDataPath('anatomy'),  'life_demo_anatomy_t1w_st
 fgFileName    = fullfile(lifeDemoDataPath('tractography'), ...
                 'life_demo_mrtrix_csd_lmax10_probabilistic.mat');
 
+N = 100;            
+            
 fg = fgRead(fgFileName);
-small_fg = fgCreate('name', ['small_' fg.name], 'fibers', fg.fibers(1:2));
-small_fg.pathwayInfo = fg.pathwayInfo(1:2);
+small_fg = fgCreate('name', ['small_' fg.name], 'fibers', fg.fibers(1:N));
+small_fg.pathwayInfo = fg.pathwayInfo(1:N);
+
 fgWrite(small_fg, fullfile(lifeDemoDataPath('diffusion'), 'small_fg.mat'));
 
 %% 
@@ -27,3 +30,6 @@ fe = feSet(fe,'fit',feFitModel(feGet(fe,'mfiber'),feGet(fe,'dsigdemeaned'),'bbnn
 
 %% 
 rmse   = feGet(fe,'vox rmse');
+
+weights = fe.life.fit.weights;
+save('small_weights.mat', 'weights')
